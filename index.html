@@ -1,36 +1,131 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Selamat Ulang Tahun Cintah♥</title>
-  <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet"><link rel="stylesheet" href="./style.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2b1d4a">
+  <title>Selamat Ulang Tahun ke-26, Cintah ♥</title>
+  <meta property="og:title" content="Ada kejutan buat kamu, Inayah 🎁">
+  <meta property="og:description" content="Buka pas udah tanggal 24 Oktober yaa ♥">
+  <meta property="og:image" content="https://dimfadd.github.io/birthday-inayah/assets/kami.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Indie+Flower&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<div class="card">
-		<div class="imgBox">
-			<div class="bark"></div>
-			<img src="kami.jpeg">
-		</div>
-		<div class="details">
-            <h4 class="color1">♥ Inayah Rida Yanti ♥</h2>
-                <h4 class="color2 margin">(BIRTHDAY)</h3>
-                  <p>Hallo Sayang,</p>
-                  <p>Selamat bertambah umur yaa</p>
-                  <p>Semoga panjang umur</p>
-                  <p>Sehat selalu, berkah & luas rezekinya</p>
-                  <p>Ga terasa yaah udah 24 th umurnya</p>
-                  <p>Semoga tambah yang baik - baik yaa</p>
-                  <p>Semua yang diinginkan segera terkabul</p>
-                  <p>Tambah dewasa, sabar & Sayang Aku <3 </p>
-                    <p class="text-right">Happy Birthday, Sweet Home!</p>
-                    <p class="text-right">♥Dimas Fadilah P.R</p>
-		</div>
-	</div>
-<!-- partial -->
-  <script  src="./script.js"></script>
+  <!-- latar: bintang & balon -->
+  <div class="sky" aria-hidden="true"></div>
+  <div class="balloons" aria-hidden="true"></div>
+  <canvas id="fx" aria-hidden="true"></canvas>
 
+  <button id="musicBtn" class="music-btn hidden" aria-label="Musik">🔊</button>
+
+  <!-- 0. Hitung mundur (kalau dibuka sebelum 24 Okt) -->
+  <section id="s-countdown" class="scene">
+    <p class="kicker">Eits, belum waktunya sayang…</p>
+    <h1 class="title">Kejutannya dibuka dalam</h1>
+    <div class="countdown">
+      <div><span id="cd-h">00</span><small>jam</small></div>
+      <div><span id="cd-m">00</span><small>menit</small></div>
+      <div><span id="cd-s">00</span><small>detik</small></div>
+    </div>
+    <p class="hint">Tunggu tengah malam yaa ♥</p>
+  </section>
+
+  <!-- 1. Kado -->
+  <section id="s-gift" class="scene">
+    <p class="kicker">24 Oktober 2026</p>
+    <h1 class="title">Ada kado buat kamu,<br><span class="name">Inayah</span></h1>
+    <button id="gift" class="gift" aria-label="Buka kado">
+      <span class="gift-lid"><span class="bow"></span></span>
+      <span class="gift-box"></span>
+    </button>
+    <p class="hint pulse">Ketuk kadonya 🎁 <br><small>(nyalakan suaranya yaa)</small></p>
+  </section>
+
+  <!-- 2. Kue & lilin -->
+  <section id="s-cake" class="scene">
+    <h1 class="title big">Happy 26<sup>th</sup></h1>
+    <p class="kicker" id="cakeText">Pejamkan mata, make a wish dulu…<br>terus tiup lilinnya 🕯️</p>
+    <div class="cake" id="cake">
+      <div class="candles">
+        <div class="candle"><span class="flame"></span><b>2</b></div>
+        <div class="candle"><span class="flame"></span><b>6</b></div>
+      </div>
+      <div class="tier tier-top"></div>
+      <div class="tier tier-bottom"></div>
+      <div class="plate"></div>
+    </div>
+    <div class="btn-row" id="blowRow">
+      <button class="btn" id="micBtn">🎤 Tiup beneran</button>
+      <button class="btn ghost" id="tapBlowBtn">Ketuk untuk tiup</button>
+    </div>
+    <p class="hint small" id="micHint"></p>
+    <button class="btn hidden" id="toCard">Lanjut ➜</button>
+  </section>
+
+  <!-- 3. Kartu ucapan -->
+  <section id="s-card" class="scene">
+    <p class="kicker">Ketuk fotonya ♥</p>
+    <div class="flip" id="flip">
+      <div class="flip-inner">
+        <div class="face front">
+          <img src="assets/kami.jpg" alt="Dimas dan Inayah" loading="lazy">
+        </div>
+        <div class="face back">
+          <h2 class="card-title">♥ Inayah Rida Yanti ♥</h2>
+          <p class="card-sub">(26th BIRTHDAY)</p>
+          <div class="letter">
+            <p>Hallo Sayang,</p>
+            <p>Selamat ulang tahun yang ke-26 yaa 🎂</p>
+            <p>Semoga panjang umur, sehat selalu,<br>berkah &amp; luas rezekinya.</p>
+            <p>Semoga semua yang kamu doakan<br>satu per satu terkabul.</p>
+            <p>Makasih udah jadi rumah buat aku.</p>
+            <p>Tambah dewasa, sabar &amp; sayang aku &lt;3</p>
+            <p class="right">Happy Birthday, Sweet Home!</p>
+            <p class="right sign">♥ Dimas Fadilah P.R</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn" id="toStats">Lanjut ➜</button>
+  </section>
+
+  <!-- 4. Angka-angka -->
+  <section id="s-stats" class="scene">
+    <p class="kicker">Sejak 24 Oktober 2000, kamu sudah…</p>
+    <div class="stats">
+      <div class="stat"><span class="num" data-key="years">26</span><small>kali keliling matahari ☀️</small></div>
+      <div class="stat"><span class="num" data-key="days">0</span><small>hari bikin dunia lebih indah</small></div>
+      <div class="stat"><span class="num" data-key="hours">0</span><small>jam hidup</small></div>
+      <div class="stat"><span class="num" data-key="beats">0</span><small>detak jantung (kira-kira 💓)</small></div>
+    </div>
+    <p class="hint">…dan aku bersyukur bisa ada di sebagian ceritanya.</p>
+    <button class="btn" id="toWishes">Lanjut ➜</button>
+  </section>
+
+  <!-- 5. 26 doa -->
+  <section id="s-wishes" class="scene scroll">
+    <h1 class="title">26 doa untuk<br>umur 26-mu</h1>
+    <p class="kicker">Ketuk tiap hati buat buka ♥ <span id="wishCount">0</span>/26</p>
+    <div class="wishes" id="wishes"></div>
+    <button class="btn hidden" id="toEnd">Satu lagi… ➜</button>
+  </section>
+
+  <!-- 6. Penutup -->
+  <section id="s-end" class="scene">
+    <img class="rose" src="assets/mawar.png" alt="Bunga mawar">
+    <h1 class="title script">Wish U all the Best,<br>Inayah</h1>
+    <p class="kicker">Selamat ulang tahun ke-26.<br>Sampai ketemu di umur-umur selanjutnya, bareng-bareng yaa.</p>
+    <p class="sign">♥ Dimas</p>
+    <div class="btn-row">
+      <button class="btn" id="moreConfetti">🎉 Lagi!</button>
+      <button class="btn ghost" id="replay">Ulangi dari awal</button>
+    </div>
+  </section>
+
+  <script src="assets/confetti.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
